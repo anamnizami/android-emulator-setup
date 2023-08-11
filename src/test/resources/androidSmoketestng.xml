@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Android Tests">
+    <parameter name="platform" value="android"/>
+
+    <test name="Android smoke Tests" verbose="2" preserve-order="true" >
+        <classes>
+            <class name="com.egym.androidtests.RegistrationTests"/>
+            <class name="com.egym.androidtests.LoginTests"/>
+        </classes>
+    </test>
+    <listeners>
+        <listener class-name="com.egym.listeners.MobileTestListener"/>
+    </listeners>
+</suite>

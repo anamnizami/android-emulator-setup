@@ -1,0 +1,15 @@
+target
+.project
+ecp-app-automation.iml
+.idea
+src/apps/
+src/test/java/com/kfz24/util/ConstantUtil.java
+allure-report/
+allure-results/
+logs
+*.apk
+*.ipa
+*.zip
+__pycache__/
+src/test/java/com/kfz24/util/ConstantUtil.java
+AutomatedTests-*
