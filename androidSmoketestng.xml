@@ -5,7 +5,7 @@
 
     <test name="Android smoke Tests" verbose="2" preserve-order="true" >
         <classes>
-            <class name="com.egym.androidtests.RegistrationTests"/>
+            <class name="com.egym.androidtests.LoginAndSearchStudioTests"/>
 
         </classes>
     </test>

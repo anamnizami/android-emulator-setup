@@ -6,6 +6,7 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
+import io.appium.java_client.service.local.AppiumServiceBuilder;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import java.io.File;
@@ -17,7 +18,7 @@ public class LocalEnvSetup {
   protected File appLocalPath = new File("src/apps/");
   protected static File startScriptPath = new File("src/test/resources/");
   public static AppiumDriverLocalService service;
-  String androidAppName  = "galaxy-QualitrainRelease-3.11.1.10574.280.apk";
+  String androidAppName  = "galaxy-QualitrainRelease-3.13.10644.283.apk";
   String iosAppName = "K24-app.app";
   DesiredCapabilities capabilities = new DesiredCapabilities();
   AppiumDriver<MobileElement> localDriver;
@@ -58,7 +59,7 @@ public class LocalEnvSetup {
     File file = new File(appLocalPath, androidAppName);
     System.out.println("file absolute path: " + file.getAbsoluteFile());
 
-    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_3a_API_34_extension_level_7_arm64-v8a");
+    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel_XL_Android_12");
     capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
     capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 15);
     capabilities.setCapability(MobileCapabilityType.APP, file.getAbsoluteFile().toString());
@@ -101,6 +102,7 @@ public class LocalEnvSetup {
       System.out.println("Use me, already running");
     } else {
       service = AppiumDriverLocalService.buildDefaultService();
+    //  service = AppiumDriverLocalService.buildService(new AppiumServiceBuilder().usingPort(4723).withArgument(() -> "--allow-insecure","chromedriver_autodownload"));
       service.start();
       System.out.println("Start and use me!");
     }

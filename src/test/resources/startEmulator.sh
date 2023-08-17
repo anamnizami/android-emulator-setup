@@ -12,5 +12,5 @@ if [ "$1" ]; then
   emulator -avd "$1"
 else
   echo "Using my local set emulator"
-  emulator -avd  Pixel_3a_API_34_extension_level_7_arm64-v8a
+  emulator -avd  Pixel_XL_Android_12
 fi
