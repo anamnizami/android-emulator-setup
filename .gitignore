@@ -2,7 +2,7 @@ target
 .project
 ecp-app-automation.iml
 .idea
-src/apps/
+#src/apps/
 src/test/java/com/kfz24/util/ConstantUtil.java
 allure-report/
 allure-results/

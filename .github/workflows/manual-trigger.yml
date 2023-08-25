@@ -1,0 +1,45 @@
+name: Manual Trigger Workflow
+
+on:
+#  push:
+#  workflow_dispatch:  # This event triggers the workflow manually
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'  # Adjust the version based on your project's requirements
+          distribution: 'adopt'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          sdk-platform: 'android-28'
+          sdk-components: 'platform-tools'
+
+      - name: Install Android SDK components
+        run: echo y | $ANDROID_HOME/tools/bin/sdkmanager "platform-tools" "platforms;android-28"
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  # Adjust the version based on your project's requirements
+
+      - name: Start Emulator
+        run: emulator -avd <emulator_name> -no-window -no-audio -no-snapshot
+
+      - name: Wait for Emulator
+        run: android-wait-for-emulator
+
+      - name: Install Appium Dependencies
+        run: npm install -g appium
+
+      - name: Run Appium Tests
+        run: appium
