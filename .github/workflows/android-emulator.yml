@@ -28,14 +28,14 @@ jobs:
           yes Y | sdkmanager --licenses
           sdkmanager --install ${ANDROID_SDK_PACKAGES}
 
-      - name: Build emulator
-        run: |
-          echo "no" | avdmanager --verbose create avd --force -n $EMULATOR_NAME --abi "${ANDROID_TARGET}/${ANDROID_ARCH}" -k "system-images;android-${API_LEVEL};${ANDROID_TARGET};${ANDROID_ARCH}"
-
-      - name: Launch emulator
-        run: |
-          chmod +x ./start_emu_headless.sh
-          EMULATOR_TIMEOUT=$EMULATOR_TIMEOUT EMULATOR_NAME=$EMULATOR_NAME ./start_emu_headless.sh
+#      - name: Build emulator
+#        run: |
+#          echo "no" | avdmanager --verbose create avd --force -n $EMULATOR_NAME --abi "${ANDROID_TARGET}/${ANDROID_ARCH}" -k "system-images;android-${API_LEVEL};${ANDROID_TARGET};${ANDROID_ARCH}"
+#
+#      - name: Launch emulator
+#        run: |
+#          chmod +x ./start_emu_headless.sh
+#          EMULATOR_TIMEOUT=$EMULATOR_TIMEOUT EMULATOR_NAME=$EMULATOR_NAME ./start_emu_headless.sh
 
 #      - name: Install and Run Appium Server
 #        run: |
@@ -47,10 +47,9 @@ jobs:
             java-version: 11
             distribution: 'adopt'
 
-      - name: Install scrcpy
+      - name: Install scrcpy on macOS
         run: |
-          sudo apt-get update
-          sudo apt-get install -y scrcpy
+          brew install scrcpy
 
       - name: Install Appium driver
         run: |
@@ -81,20 +80,32 @@ jobs:
 #        run: mvn clean test -Dsurefire.suiteXmlFiles=androidSmoketestng.xml -Dplatform=android || true
 
       - name: Record Video with scrcpy
-        run: |
-          # Start recording the screen using scrcpy
-          scrcpy --record output.mp4 &
-          # Capture the process ID of scrcpy for later termination
-          RECORDING_PID=$!
-          
-          # Run your Appium tests here
-          # For example:
-          mvn clean test -Dsurefire.suiteXmlFiles=androidSmoketestng.xml -Dplatform=android || true
-          
-          # Stop the video recording
-          kill $RECORDING_PID
-        env:
-          DISPLAY: ":0"
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+           api-level: 33
+           target: google_apis
+           arch: x86_64
+           profile: Nexus 6
+           script:
+                scrcpy --record output.mp4 &
+                RECORDING_PID=$!
+                mvn clean test -Dsurefire.suiteXmlFiles=androidSmoketestng.xml -Dplatform=android || true
+                kill $RECORDING_PID
+
+#        run: |
+#          # Start recording the screen using scrcpy
+#          scrcpy --record output.mp4 &
+#          # Capture the process ID of scrcpy for later termination
+#          RECORDING_PID=$!
+#
+#          # Run your Appium tests here
+#          # For example:
+#          mvn clean test -Dsurefire.suiteXmlFiles=androidSmoketestng.xml -Dplatform=android || true
+#
+#          # Stop the video recording
+#          kill $RECORDING_PID
+#        env:
+#          DISPLAY: ":0"
 
       - name: Publish Video
         uses: actions/upload-artifact@v2
@@ -102,8 +113,8 @@ jobs:
           name: output.mp4
           path: output.mp4
 
-#      - name: Upload Appium logs
-#        uses: actions/upload-artifact@v2
-#        with:
-#          name: appium-logs
-#          path: appium.log
+      - name: Upload Appium logs
+        uses: actions/upload-artifact@v2
+        with:
+          name: appium-logs
+          path: appium.log
