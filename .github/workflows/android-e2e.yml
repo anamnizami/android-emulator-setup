@@ -207,6 +207,7 @@ jobs:
         with:
           api-level: ${{ matrix.api-level }}
           force-avd-creation: false
+          profile: Nexus 6
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: mvn clean test -Dsurefire.suiteXmlFiles=androidSmoketestng.xml -Dplatform=android || true

@@ -59,7 +59,7 @@ public class LocalEnvSetup {
     File file = new File(appLocalPath, androidAppName);
     System.out.println("file absolute path: " + file.getAbsoluteFile());
     //"Pixel_XL_Android_12"
-    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Pixel XL API 31");
+    capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, "Nexus 6");
     capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, "uiautomator2");
     capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 15);
     capabilities.setCapability(MobileCapabilityType.APP, file.getAbsoluteFile().toString());
