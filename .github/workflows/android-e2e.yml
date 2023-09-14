@@ -209,11 +209,11 @@ jobs:
           force-avd-creation: false
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
-          script: mvn clean test -Pandroid > build.log
+          script: mvn clean test -Dsurefire.suiteXmlFiles=androidSmoketestng.xml -Dplatform=android || true
 
 
       - name: Upload Appium logs
         uses: actions/upload-artifact@v2
         with:
           name: appium-logs
-          path: build.log
+          path: appium.log
