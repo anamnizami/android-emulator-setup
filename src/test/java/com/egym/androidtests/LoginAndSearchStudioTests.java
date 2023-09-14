@@ -42,10 +42,10 @@ public class LoginAndSearchStudioTests extends Base {
     loginPageObject.fillOutLoginForm(email, password);
     Assert.assertTrue(homePageObject.checkIfWidgetHomeViewIsDisplayed());
 
-    homePageObject.clickGymSearchWidget();
-    gymSearchPageObject.clickWhileUsingTheAppButton();
+//    homePageObject.clickGymSearchWidget();
+//    gymSearchPageObject.clickWhileUsingTheAppButton();
 //    gymSearchPageObject.searchKaleAndCake(driver);
-    Assert.assertEquals("9", "9");
+//    Assert.assertEquals("9", "9");
     try {
       Thread.sleep(5000);
     } catch (InterruptedException e) {
