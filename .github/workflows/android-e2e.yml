@@ -99,8 +99,6 @@ jobs:
         arch: x86_64
         profile: Nexus 6
         script: |
-          
-   
 
           mvn --batch-mode --update-snapshots package
           
