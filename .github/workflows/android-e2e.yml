@@ -64,9 +64,9 @@
 name: Appium CI
 on:
   push:
-    branches: [ main ]
+    branches: [ github_action_workflow ]
   pull_request:
-    branches: [ main ]
+    branches: [ github_action_workflow ]
   workflow_dispatch:
 
 jobs:
