@@ -85,8 +85,8 @@ jobs:
         java-version: 11
     - name: Install the Emulator
       run: |
-        chmod +x ./scripts/RunAppiumServer.sh
-        ./scripts/RunAppiumServer.sh
+        chmod +x ./scripts/run_appium_server.sh
+        ./scripts/run_appium_server.sh
       shell: bash
 
 
