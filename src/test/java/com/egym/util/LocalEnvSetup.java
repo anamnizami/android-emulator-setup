@@ -64,6 +64,8 @@ public class LocalEnvSetup {
     capabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 15);
     capabilities.setCapability(MobileCapabilityType.APP, file.getAbsoluteFile().toString());
     capabilities.setCapability(MobileCapabilityType.FULL_RESET, true);
+    capabilities.setCapability(AndroidMobileCapabilityType.ANDROID_INSTALL_TIMEOUT, 400000);
+
 //    capabilities.setCapability("androidInstallTimeout", 400000);
 //    capabilities.setCapability("appium:uiautomator2ServerInstallTimeout", 120000);
 
